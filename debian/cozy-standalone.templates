@@ -2,9 +2,9 @@
 Template: cozy/fqdn
 Type: string
 Description: Domain name of your Cozy
- Choose you Cozy's FQDN (fully-qualified domain name).
- A self-signed certificate will be issued for this domain only, and the Nginx
- web server will configured with this domain name.
+ Choose your Cozy's FQDN (fully-qualified domain name).
+ A signed certificate will be generated for this domain only. The Nginx
+ web server will be configured accordingly to this domain name.
  .
  i.e.: cozy.example.com
 
@@ -12,25 +12,27 @@ Template: cozy/purge_db
 Type: boolean
 Default: true
 Description: Purge database?
- If you say YES, the cozy database is DELETED. And you lose all your data.  We
- suggest to make a backup of /var/lib/couchdb/cozy.couch. You can do a hot copy.
- CouchDB is design to can backup started.
+ If you say YES, the cozy database will be DELETED. And you will lose all your data.
+ We recommend you to make a backup of the following file /var/lib/couchdb/cozy.couch. 
+ You can copy the file without stopping your Cozy, CouchDB is design to be able 
+ to perform backups while running.
 
 Template: cozy/certificate
 Type: text
 Default: true
-Description: Self-signed certificate
- Cozy Mobile won't recognize it until you validate it on your mobile. Go there:
- https://davdroid.bitfire.at/faq/entry/importing-a-certificate for instruction
- on how to do it.
+Description: Self-signed certificate and Mobile
+ If you use a self-signed certificate, Cozy Mobile won't recognize it until you validate 
+ it on your mobile. Go read this documentation to know how to register a certificate
+ on your mobile:
+ https://davdroid.bitfire.at/faq/entry/importing-a-certificate for instructio
 
 Template: cozy/certificate_type
 Type: select
 Choices: none, selfsigned, letsencrypt
 Default: selfsigned
-Description: How sign server certificate?
- How to sign the certificate:
-  * selfsigned Self signed certificate
-  * letsencrypt send CSR to let's encrypt for signing
-  * none do not generate certificate
+Description: SSL certificate generation
+Which method do you want to use to generate and sign your server SSL certificate?
+  * selfsigned Generate a certificate with OpenSSL and sign it locally.
+  * letsencrypt Generate a certificate with OpenSSL and send CSR to Let's Encrypt for a proper signature (recommended)
+  * none Do not generate a certificate (choose this option only if you already have a certificate)
 
